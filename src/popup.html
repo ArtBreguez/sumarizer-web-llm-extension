@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Sumarizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarizer</title>
     <link rel="stylesheet" href="popup.css" />
     <link
       rel="stylesheet"
@@ -10,23 +11,27 @@
     />
   </head>
   <body>
+    <!-- Loading container for progress bar -->
     <div id="loadingContainer"></div>
 
+    <!-- Input container with search bar and submit button -->
     <div class="input-container form-group">
       <input
         type="search"
         id="query-input"
-        placeholder="Sumarize your text here..."
+        placeholder="Summarize your text here..."
       />
       <button id="submit-button" class="btn">
-        <i class="fa fa-comments"></i>
+        <i class="fa fa-pencil"></i>
       </button>
     </div>
 
+    <!-- Loading indicator with custom animation -->
     <div class="stage">
       <div id="loading-indicator" class="dot-flashing"></div>
     </div>
 
+    <!-- Wrapper for the answer and copy feature -->
     <div id="answerWrapper">
       <div id="answer"></div>
       <div class="copyRow">
@@ -41,6 +46,7 @@
       </div>
     </div>
 
+    <!-- Script -->
     <script type="module" src="./popup.ts"></script>
   </body>
 </html>

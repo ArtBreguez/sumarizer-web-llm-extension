@@ -1,240 +1,166 @@
-*,
-*::before,
-*::after {
+/* Reset and universal box-sizing */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Global font and background settings */
 html {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Helvetica,
-    Arial,
-    sans-serif;
-  color: #222;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
 body {
   margin: 0;
-  padding: 0.5rem;
-  background-color: #778da9;
+  padding: 1rem;
+  background-color: #f0f4f8;
   width: 320px;
   font-size: small;
 }
 
-p {
-  margin: 0;
-}
-
-/* LOADING BAR */
-#loadingContainer {
-  margin-bottom: 15px;
-  width: 300px;
-  height: 8px;
-}
-
-/* INPUT AREA */
+/* Text input styling */
 #query-input {
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 100%;
+  border: 2px solid #e0e4e7;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease;
 }
 
+#query-input:focus {
+  border-color: #1d72b8;
+  outline: none;
+}
+
+/* Input container */
 .input-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.input-container input {
-  width: 100%;
-  outline: none;
-  padding: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-/* SUBMIT BUTTON */
+/* Button styling */
 .btn {
-  background-color: #1b263b;
-  color: white;
-  font-size: small;
-  cursor: pointer;
-  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1d72b8;
+  color: #fff;
+  padding: 0.7rem;
+  font-size: 16px;
+  border-radius: 8px;
   border: none;
-  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn i {
+  margin-right: 0.3rem;
 }
 
 .btn:hover {
-  background-color: #d0d0d0;
+  background-color: #155a8a;
 }
 
 .btn:disabled {
   background-color: #a7a7a7;
-  color: rgb(255, 255, 255);
-  cursor: default;
+  cursor: not-allowed;
 }
 
-.btn img {
-  width: 1rem;
-  height: 1rem;
-}
-
-/* LOADING */
-
+/* Loading indicator animation */
 .stage {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  margin: 0 -5%;
-  overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 #loading-indicator {
   display: none;
-  color: white;
-  margin-top: 0.5rem;
+  color: #fff;
 }
 
 .dot-flashing {
   position: relative;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #1b263b;
-  color: #1b263b;
-  animation: dot-flashing 0.4s infinite linear alternate;
-  animation-delay: 0.2s;
-}
-
-.dot-flashing::before,
-.dot-flashing::after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 0;
-}
-
-.dot-flashing::before {
-  left: -15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #1b263b;
-  color: #1b263b;
-  animation: dot-flashing 0.4s infinite alternate;
-  animation-delay: 0s;
-}
-
-.dot-flashing::after {
-  left: 15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #1b263b;
-  color: #1b263b;
-  animation: dot-flashing 0.4s infinite alternate;
-  animation-delay: 0.4s;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #1d72b8;
+  animation: dot-flashing 1s infinite linear alternate;
 }
 
 @keyframes dot-flashing {
   0% {
-    background-color: #1b263b;
+    background-color: #1d72b8;
   }
-
-  50%,
-  100% {
-    background-color: #415a77;
+  50%, 100% {
+    background-color: #a4c2f4;
   }
 }
 
-/* ANSWERS */
-#queriesAnswersContainer {
-  display: block;
-  color: white;
-  margin-top: 0.5rem;
+/* Answer box styling */
+#answerWrapper {
+  display: none;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  color: #333;
 }
 
 #answer {
-  color: #333333;
+  color: #555;
+  line-height: 1.6;
 }
 
-#answerWrapper {
-  display: none;
-  background-color: #ffd166;
-  border-radius: 8px;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.queriesAnswers {
-  border-radius: 8px;
-  background-color: #ffd166;
-  padding: 0.5rem;
-  color: #333333;
-}
-
-#lastQuery {
-  color: rgb(188, 188, 188);
-}
-
-#lastAnswer {
-  color: white;
-  margin-top: 0.5rem;
-}
-
-#lastRequest {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  background-color: #333333;
-  border-radius: 4px;
-}
-
-/* ANSWER OPTIONS */
-.timeStamp {
-  color: #9a8c98;
-}
-
+/* Timestamp and copy button container */
 .copyRow {
   display: flex;
-  flex-direction: row;
-  align-items: end;
   justify-content: space-between;
-  color: #a7a7a7;
+  align-items: center;
   margin-top: 0.5rem;
+  color: #888;
 }
 
-.copyText {
-  display: none;
-  color: #a7a7a7;
-  margin-right: 0.5rem;
-}
-
+/* Copy button styles */
 .copyButton {
-  color: #415a77;
   background-color: transparent;
+  color: #1d72b8;
   border: none;
   cursor: pointer;
-  padding: 0;
-  margin-left: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .copyButton:hover {
-  color: #5e80a7;
-  background-color: transparent;
+  color: #155a8a;
 }
 
-.removeButton {
-  color: #415a77;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+/* Copy button hover effect */
+.copyButton i {
+  color: #1d72b8;
 }
 
-.removeButton:hover {
-  color: #5e80a7;
-  background-color: transparent;
+.copyButton:hover i {
+  color: #155a8a;
 }
+
+/* Timestamp styling */
+#timestamp {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Loading bar */
+#loadingContainer {
+  width: 100%;
+  height: 8px;
+  margin-bottom: 15px;
+}
+
