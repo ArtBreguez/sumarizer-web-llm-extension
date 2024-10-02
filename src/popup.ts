@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const copyButton = document.getElementById("copyAnswer") as HTMLButtonElement;
 
   let maxTokens = 250; // Valor inicial dos tokens
+  let modelReady = false; // Variável para rastrear se o modelo está pronto
 
   // Inicialmente, o botão de envio está desativado
   submitButton.disabled = true;
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
     if (report.progress === 1.0) {
       enableInputs(); // Ativar inputs quando o modelo estiver carregado
+      modelReady = true; // Modelo está pronto
     }
   };
 
@@ -72,6 +74,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     submitButton.innerHTML = '<span class="loading-dots"></span>';
     submitButton.disabled = true; // Desativar o botão enquanto o modelo processa a resposta
 
+    // Verificar se o modelo está carregado, caso contrário, aguardar o carregamento
+    await waitForModelReady();
+
     const messages: ChatCompletionMessageParam[] = [
       {
         role: "system",
@@ -93,6 +98,22 @@ document.addEventListener("DOMContentLoaded", async function () {
     answerElement.innerHTML = (answer || "").replace(/(?:\r\n|\r|\n)/g, "<br>");
     submitButton.innerHTML = "Summarize"; // Restaurar o texto do botão após a resposta ser processada
     submitButton.disabled = false; // Reativar o botão
+  }
+
+  // Função para aguardar o carregamento do modelo
+  function waitForModelReady(): Promise<void> {
+    return new Promise((resolve) => {
+      if (modelReady) {
+        resolve(); // Se o modelo já estiver pronto, resolver imediatamente
+      } else {
+        const interval = setInterval(() => {
+          if (modelReady) {
+            clearInterval(interval);
+            resolve(); // Resolver a promessa quando o modelo estiver pronto
+          }
+        }, 100); // Verificar a cada 100ms
+      }
+    });
   }
 
   // Adicionar evento de cópia
