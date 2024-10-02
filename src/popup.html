@@ -10,39 +10,55 @@
     />
   </head>
   <body>
-    <div id="loadingContainer"></div>
+    <div class="container">
+      <h1 class="title">AI Text Summarizer</h1>
+      <hr class="divider" />
 
-    <div class="input-container form-group">
-      <input
-        type="search"
+      <!-- Barra de progresso de carregamento do modelo -->
+      <div id="loadingContainer"></div>
+
+      <!-- Campo de texto para entrada -->
+      <textarea
         id="query-input"
         placeholder="Summarize your text here..."
-      />
-      <button id="submit-button" class="btn">
-        <i class="fa fa-pencil"></i>
-      </button>
-    </div>
+        class="input-text"
+      ></textarea>
 
-    <!-- Este é o container que vai mostrar o texto "Loading model..." e depois a barra de tokens -->
-    <div id="tokenRangeContainer" class="token-slider">
-      <span id="tokenLabel">Loading model...</span>
+      <!-- Dropdown para seleção do comprimento do resumo -->
+      <div class="dropdown-container">
+        <label for="summary-length">Summary Length:</label>
+        <select id="summary-length" class="dropdown">
+          <option value="Brief">Brief</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="Long">Long</option>
+        </select>
+      </div>
+
+      <!-- Botão de enviar -->
+      <button id="submit-button" class="btn">Summarize</button>
+
+      <!-- Área de resultado de resumo -->
+      <div id="answerWrapper">
+        <div id="answer"></div>
+        <div class="copyRow">
+          <button
+            id="copyAnswer"
+            class="btn copyButton"
+            title="Copy the Answer to the Clipboard"
+          >
+            <i class="fa-solid fa-copy fa-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <footer class="footer">
+        Powered By: <a href="https://yourwebsite.com">Your Website</a>
+      </footer>
     </div>
 
     <div class="stage">
       <div id="loading-indicator" class="dot-flashing"></div>
-    </div>
-
-    <div id="answerWrapper">
-      <div id="answer"></div>
-      <div class="copyRow">
-        <button
-          id="copyAnswer"
-          class="btn copyButton"
-          title="Copy the Answer to the Clipboard"
-        >
-          <i class="fa-solid fa-copy fa-lg"></i>
-        </button>
-      </div>
     </div>
 
     <script type="module" src="./popup.ts"></script>

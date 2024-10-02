@@ -12,14 +12,39 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 1rem;
-  background-color: #f0f4f8;
-  width: 320px;
-  font-size: small;
+  background-color: #f8f9fa;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Text input styling */
+/* Container (Card) */
+.container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Title (CardTitle) */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Divider */
+.divider {
+  height: 2px;
+  background-color: #000;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Textarea */
 #query-input {
   width: 100%;
   border: 2px solid #e0e4e7;
@@ -29,7 +54,8 @@ body {
   color: #333;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border 0.3s ease;
+  min-height: 100px;
+  margin-bottom: 20px;
 }
 
 #query-input:focus {
@@ -37,12 +63,27 @@ body {
   outline: none;
 }
 
-/* Input container */
-.input-container {
+/* Dropdown for summary length */
+.dropdown-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
+}
+
+.dropdown-container label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dropdown {
+  padding: 0.7rem;
+  border: 2px solid #e0e4e7;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  width: 120px;
 }
 
 /* Button styling */
@@ -58,10 +99,8 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.btn i {
-  margin-right: 0.3rem;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .btn:hover {
@@ -73,63 +112,30 @@ body {
   cursor: not-allowed;
 }
 
-/* Loading indicator animation */
-.stage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-#loading-indicator {
-  display: none;
-  color: #fff;
-}
-
-.dot-flashing {
-  position: relative;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #1d72b8;
-  animation: dot-flashing 1s infinite linear alternate;
-}
-
-@keyframes dot-flashing {
-  0% {
-    background-color: #1d72b8;
-  }
-  50%, 100% {
-    background-color: #a4c2f4;
-  }
-}
-
 /* Answer box styling */
 #answerWrapper {
   display: none;
-  background-color: #ffffff;
+  background-color: #f1f3f5;
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
-  color: #333;
 }
 
 #answer {
   color: #555;
   line-height: 1.6;
+  font-size: 14px;
 }
 
-/* Timestamp and copy button container */
+/* Copy button styling */
 .copyRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
-  color: #888;
 }
 
-/* Copy button styles */
 .copyButton {
   background-color: transparent;
   color: #1d72b8;
@@ -142,74 +148,36 @@ body {
   color: #155a8a;
 }
 
-/* Copy button hover effect */
-.copyButton i {
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.footer a {
   color: #1d72b8;
+  text-decoration: none;
 }
 
-.copyButton:hover i {
-  color: #155a8a;
+.footer a:hover {
+  text-decoration: underline;
 }
 
-/* Loading bar */
-#loadingContainer {
-  width: 100%;
-  height: 8px;
-  margin-bottom: 15px;
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
 }
 
-/* Token slider styles */
-.token-slider {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#tokenRange {
-  width: 80%;
-  cursor: pointer;
-  -webkit-appearance: none;
-  height: 10px;
-  background-color: green;
-  border-radius: 5px;
-}
-
-#tokenRange::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid #000;
-}
-
-#tokenRange:focus {
-  outline: none;
-}
-
-#tokenLabel {
-  margin-right: 10px;
-}
-
-#answerWrapper {
-  display: none;
-  background-color: #ffd166;
-  border-radius: 8px;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-/* Color states for the token slider based on values */
-#tokenRange[value="1"] {
-  background-color: green;
-}
-
-#tokenRange[value="2"] {
-  background-color: yellow;
-}
-
-#tokenRange[value="3"] {
-  background-color: red;
+.loading-dots::after {
+  content: '...';
+  display: inline-block;
+  animation: blink 1.4s infinite both;
 }
