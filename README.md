@@ -21,12 +21,13 @@ An AI-powered text summarizer that allows you to condense large amounts of text 
    
    ```bash
    git clone https://github.com/yourusername/summarizer-extension.git
-  ```
+     ```
+
 2. Run npm install and npm run build
    ```bash
    npm i
    npm run build
-  ```
+     ```
 3. Open Chrome and navigate to `chrome://extensions/`.
 4. Enable **Developer Mode** in the top right corner.
 5. Click **Load unpacked** and select the folder containing the dist folder.
