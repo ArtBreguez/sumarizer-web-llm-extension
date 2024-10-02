@@ -1,6 +1,6 @@
 # AI Text Summarizer Extension
 
-An AI-powered text summarizer that allows you to condense large amounts of text directly from your browser.
+An AI-powered text summarizer that allows you to condense large amounts of text directly from your browser using the **Llama-3.2-1B-Instruct-q4f16_1-MLC** model.
 
 ## Features
 
