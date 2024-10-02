@@ -14,13 +14,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   const queryInput = document.getElementById("query-input") as HTMLInputElement;
   const submitButton = document.getElementById("submit-button") as HTMLButtonElement;
   const tokenRangeContainer = document.getElementById("tokenRangeContainer") as HTMLElement;
-  const tokenRange = document.createElement("input") as HTMLInputElement; // Criar o input range dinâmicamente
+  const tokenRange = document.createElement("input") as HTMLInputElement; // Criar o input range dinamicamente
   const tokenLabel = document.getElementById("tokenLabel") as HTMLSpanElement;
   const answerWrapper = document.getElementById("answerWrapper") as HTMLElement;
   const answerElement = document.getElementById("answer") as HTMLElement;
   const loadingIndicator = document.getElementById("loading-indicator") as HTMLElement;
+  const copyButton = document.getElementById("copyAnswer") as HTMLButtonElement; // Botão de cópia
 
-  let maxTokens = 50; // Valor inicial dos tokens
+  let maxTokens = 250; // Valor inicial dos tokens
 
   // Inicialmente, o botão de envio está desativado e o controle de tokens está mostrando "Loading model..."
   submitButton.disabled = true;
@@ -100,27 +101,69 @@ document.addEventListener("DOMContentLoaded", async function () {
   submitButton.addEventListener("click", async function () {
     const message = queryInput.value;
     console.log("message", message);
-
+  
     answerElement.innerHTML = "";
     answerWrapper.style.display = "none";
     loadingIndicator.style.display = "block";
-
+  
+    // Ajustar o prompt conforme o valor do tokenRange
+    let summarizationLevel = "";
+    switch (tokenRange.value) {
+      case "1":
+        summarizationLevel = "Brief"; // Resumo breve
+        break;
+      case "2":
+        summarizationLevel = "Medium"; // Resumo médio
+        break;
+      case "3":
+        summarizationLevel = "Long"; // Resumo detalhado
+        break;
+    }
+  
     const messagess: ChatCompletionMessageParam[] = [
-      { role: "system", content: "You are a highly efficient text summarizer. Do not include any introductions, explanations, or other text. Only return the concise summary of the input." },
+      {
+        role: "system",
+        content: `You are a highly efficient text summarizer. Provide only the ${summarizationLevel.toLowerCase()} summary without any introductions or explanations. Just the summary content itself.`,
+      },
       { role: "user", content: message },
     ];
-
+  
     const completion = await engine.chat.completions.create({
       messages: messagess,
       max_tokens: maxTokens, // Utiliza o valor atualizado dos tokens
     });
-
+  
     updateAnswer(completion.choices[0].message.content);
-  });
+  });  
 
   function updateAnswer(answer: string | null) {
     answerWrapper.style.display = "block";
-    answerElement.innerHTML = (answer || "").replace(/\n/g, "<br>");
+    
+    // Repare as quebras de linha e exiba o texto corretamente
+    answerElement.innerHTML = (answer || "").replace(/(?:\r\n|\r|\n)/g, "<br>");
+    
     loadingIndicator.style.display = "none";
+  
+    // Adicionar evento de clique no botão de cópia
+    copyButton.onclick = () => {
+      if (answer) {
+        navigator.clipboard.writeText(answer).then(
+          () => {
+            // Alterar o botão para "Copiado!" temporariamente
+            const originalButtonContent = copyButton.innerHTML;
+            copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+            setTimeout(() => {
+              copyButton.innerHTML = originalButtonContent; // Restaurar após 2 segundos
+            }, 2000);
+            console.log("Texto copiado para a área de transferência!");
+          },
+          (err) => {
+            console.error("Erro ao copiar o texto: ", err);
+          }
+        );
+      }
+    };
   }
+  
+  
 });
