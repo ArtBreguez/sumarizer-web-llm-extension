@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const loadingContainer = document.getElementById("loadingContainer") as HTMLElement;
   const copyButton = document.getElementById("copyAnswer") as HTMLButtonElement;
 
-  let maxTokens = 250; // Valor inicial dos tokens
+  let maxTokens = 500; // Valor inicial dos tokens
   let modelReady = false; // Variável para rastrear se o modelo está pronto
 
   // Inicialmente, o botão de envio está desativado

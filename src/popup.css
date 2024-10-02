@@ -1,11 +1,9 @@
-/* Reset and universal box-sizing */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Global font and background settings */
 html {
   font-family: 'Poppins', sans-serif;
   color: #333;
@@ -19,7 +17,6 @@ body {
   padding: 20px;
 }
 
-/* Container (Card) */
 .container {
   background-color: white;
   border-radius: 12px;
@@ -28,7 +25,6 @@ body {
   margin-top: 20px;
 }
 
-/* Title (CardTitle) */
 h1 {
   font-size: 24px;
   font-weight: bold;
@@ -36,7 +32,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Divider */
 .divider {
   height: 2px;
   background-color: #000;
@@ -44,7 +39,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Textarea */
 #query-input {
   width: 100%;
   border: 2px solid #e0e4e7;
@@ -63,7 +57,6 @@ h1 {
   outline: none;
 }
 
-/* Dropdown for summary length */
 .dropdown-container {
   display: flex;
   justify-content: space-between;
@@ -86,7 +79,6 @@ h1 {
   width: 120px;
 }
 
-/* Button styling */
 .btn {
   display: flex;
   align-items: center;
@@ -112,7 +104,6 @@ h1 {
   cursor: not-allowed;
 }
 
-/* Answer box styling */
 #answerWrapper {
   display: none;
   background-color: #f1f3f5;
@@ -128,7 +119,6 @@ h1 {
   font-size: 14px;
 }
 
-/* Copy button styling */
 .copyRow {
   display: flex;
   justify-content: space-between;
@@ -142,17 +132,25 @@ h1 {
   border: none;
   cursor: pointer;
   transition: color 0.3s ease;
+  font-size: 16px; 
+  padding: 8px; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  border-radius: 8px; 
 }
 
 .copyButton:hover {
-  color: #155a8a;
+  color: #155a8a; 
+  background-color: rgba(0, 0, 0, 0.05); 
 }
 
-/* Footer */
 .footer {
   text-align: center;
   font-size: 12px;
   color: #888;
+  margin-top: 20px; 
+  padding-bottom: 10px; 
 }
 
 .footer a {
